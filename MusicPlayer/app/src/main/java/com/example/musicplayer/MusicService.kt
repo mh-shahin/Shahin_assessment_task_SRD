@@ -46,14 +46,22 @@ class MusicService : Service() {
         currentIndex = index.coerceIn(0, songs.lastIndex)
         mediaPlayer?.release()
         mediaPlayer = MediaPlayer().apply {
-            setDataSource(songs[currentIndex].path)
-            prepare()
-            start()
+            try {
+                setDataSource(songs[currentIndex].path)
+            } catch (e: Exception) {
+                release()
+                mediaPlayer = null
+                return
+            }
+            setOnPreparedListener { mp ->
+                mp.start()
+                onSongChanged?.invoke(currentIndex)
+                onPlayStateChanged?.invoke(true)
+                startForeground(NOTIFICATION_ID, buildNotification())
+            }
             setOnCompletionListener { playNext() }
+            prepareAsync()
         }
-        onSongChanged?.invoke(currentIndex)
-        onPlayStateChanged?.invoke(true)
-        startForeground(NOTIFICATION_ID, buildNotification())
     }
 
     fun togglePlayPause() {

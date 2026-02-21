@@ -43,6 +43,8 @@ class MainActivity : AppCompatActivity() {
         private const val PERMISSION_REQUEST_CODE = 100
     }
 
+    private var progressRunnable: Runnable? = null
+
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName, service: IBinder) {
             val binder = service as MusicService.MusicBinder
@@ -86,6 +88,7 @@ class MainActivity : AppCompatActivity() {
                 musicService?.togglePlayPause()
             } else if (songs.isNotEmpty()) {
                 val currentIndex = musicService?.getCurrentIndex() ?: 0
+                // getDuration() == 0 means no song has been loaded yet
                 if (musicService?.getDuration() == 0) {
                     musicService?.playSong(currentIndex)
                 } else {
@@ -160,10 +163,10 @@ class MainActivity : AppCompatActivity() {
                 songs.add(
                     Song(
                         id = it.getLong(idCol),
-                        title = it.getString(titleCol),
-                        artist = it.getString(artistCol),
+                        title = it.getString(titleCol) ?: "Unknown Title",
+                        artist = it.getString(artistCol) ?: "Unknown Artist",
                         duration = it.getLong(durationCol),
-                        path = it.getString(dataCol)
+                        path = it.getString(dataCol) ?: ""
                     )
                 )
             }
@@ -205,9 +208,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startProgressUpdate() {
-        handler.post(object : Runnable {
+        progressRunnable = object : Runnable {
             override fun run() {
-                if (isBound) {
+                if (isBound && !isFinishing) {
                     val position = musicService?.getCurrentPosition() ?: 0
                     val duration = musicService?.getDuration() ?: 0
                     seekBar.max = duration
@@ -215,10 +218,12 @@ class MainActivity : AppCompatActivity() {
                 }
                 handler.postDelayed(this, 500)
             }
-        })
+        }
+        handler.post(progressRunnable!!)
     }
 
     override fun onDestroy() {
+        progressRunnable?.let { handler.removeCallbacks(it) }
         handler.removeCallbacksAndMessages(null)
         if (isBound) {
             unbindService(serviceConnection)

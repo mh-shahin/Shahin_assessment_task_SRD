@@ -32,11 +32,13 @@ class SongAdapter(
         holder.tvDuration.text = formatDuration(song.duration)
         holder.itemView.isSelected = position == selectedPosition
         holder.itemView.setOnClickListener {
+            val pos = holder.bindingAdapterPosition
+            if (pos == RecyclerView.NO_POSITION) return@setOnClickListener
             val previous = selectedPosition
-            selectedPosition = holder.adapterPosition
+            selectedPosition = pos
             notifyItemChanged(previous)
             notifyItemChanged(selectedPosition)
-            onSongClick(holder.adapterPosition)
+            onSongClick(pos)
         }
     }
 
