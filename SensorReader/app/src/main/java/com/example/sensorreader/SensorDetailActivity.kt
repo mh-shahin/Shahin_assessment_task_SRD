@@ -46,9 +46,11 @@ class SensorDetailActivity : AppCompatActivity(), SensorEventListener {
             val tvVendor = findViewById<TextView>(R.id.tvDetailVendor)
             val tvResolution = findViewById<TextView>(R.id.tvDetailResolution)
             val tvRange = findViewById<TextView>(R.id.tvDetailRange)
-            tvVendor.text = getString(R.string.vendor_format, sensor!!.vendor)
-            tvResolution.text = getString(R.string.resolution_format, sensor!!.resolution)
-            tvRange.text = getString(R.string.range_format, sensor!!.maximumRange)
+            sensor?.let { s ->
+                tvVendor.text = getString(R.string.vendor_format, s.vendor)
+                tvResolution.text = getString(R.string.resolution_format, s.resolution)
+                tvRange.text = getString(R.string.range_format, s.maximumRange)
+            }
             tvStatus.text = getString(R.string.listening)
         }
     }
