@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SensorReader</string>
+    <string name="not_available">Not Available on this device</string>
+    <string name="header_title">Device Sensor Reader</string>
+    <string name="loading_device_info">Loading device info&#8230;</string>
+    <string name="live_updates_status">Live readings updating in real-time</string>
+</resources>

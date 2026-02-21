@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MusicPlayer</string>
+    <string name="app_header"> Music Player</string>
+    <string name="initial_song_title">Select a song</string>
+    <string name="initial_artist_name">—</string>
+    <string name="initial_time">0:00</string>
+    <string name="content_desc_previous">Previous</string>
+    <string name="content_desc_play_pause">Play or Pause</string>
+    <string name="content_desc_stop">Stop</string>
+    <string name="content_desc_next">Next</string>
+    <string name="player_control_hint">⏹ = Stop  |  ⏸ = Pause</string>
+</resources>
