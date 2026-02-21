@@ -1,19 +1,6 @@
 # Building an Android Sensor Reader App
 
 
----
-
-## Why I Wrote This
-
-A few months ago, I was building a small fitness tracking feature for an Android app. I needed to read accelerometer data — seemed simple enough. But I quickly ran into a wall. The official documentation was scattered, Stack Overflow answers were outdated, and most tutorials either skipped the "why" completely or dumped a wall of code with zero explanation.
-
-So I went through the trial and error myself, figured it out, and now I'm writing the guide I wish existed back then.
-
-By the end of this article, you'll have a working Android app that reads live data from multiple sensors — accelerometer, gyroscope, light, pressure, temperature, and more. More importantly, you'll understand *why* the code is written the way it is, not just *what* to copy-paste.
-
-Let's get into it.
-
----
 
 ## What You Need Before Starting
 
@@ -62,7 +49,7 @@ app/src/main/
 └── res/
     ├── layout/
     │   ├── activity_main.xml          ← Main screen UI
-    │   └── item_sensor.xml            ← One sensor row UI
+    │   └── model_sensor.xml            ← One sensor row UI
     └── drawable/                      ← Visual styles
 ```
 
