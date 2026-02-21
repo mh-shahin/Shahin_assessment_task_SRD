@@ -215,8 +215,8 @@ class MainActivity : AppCompatActivity() {
                     val duration = musicService?.getDuration() ?: 0
                     seekBar.max = duration
                     seekBar.progress = position
+                    handler.postDelayed(this, 500)
                 }
-                handler.postDelayed(this, 500)
             }
         }
         handler.post(progressRunnable!!)

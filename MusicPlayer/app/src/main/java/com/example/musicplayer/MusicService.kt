@@ -9,6 +9,7 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Binder
 import android.os.IBinder
+import android.util.Log
 import androidx.core.app.NotificationCompat
 
 class MusicService : Service() {
@@ -49,6 +50,8 @@ class MusicService : Service() {
             try {
                 setDataSource(songs[currentIndex].path)
             } catch (e: Exception) {
+                Log.e("MusicService", "Failed to set data source for ${songs[currentIndex].path}", e)
+                onPlayStateChanged?.invoke(false)
                 release()
                 mediaPlayer = null
                 return
