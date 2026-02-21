@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sensor Reader</string>
+    <string name="sensor_count_format">%d sensors available</string>
+    <string name="vendor_format">Vendor: %s</string>
+    <string name="resolution_format">Resolution: %s</string>
+    <string name="range_format">Max Range: %s</string>
+    <string name="live_readings">Live Readings</string>
+    <string name="sensor_not_available">Sensor not available on this device</string>
+    <string name="listening">Listening for sensor events…</string>
+    <string name="accuracy_high">High</string>
+    <string name="accuracy_medium">Medium</string>
+    <string name="accuracy_low">Low</string>
+    <string name="accuracy_unreliable">Unreliable</string>
+    <string name="accuracy_unknown">Unknown</string>
+    <string name="accuracy_format">Accuracy: %s</string>
+    <string name="unknown_sensor">Unknown Sensor</string>
+</resources>
